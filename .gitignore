@@ -1,0 +1,18 @@
+# editor/ IDE
+.idea
+.project
+.vscode/
+*.code-workspace
+
+# composer
+vendor
+composer.lock
+
+# phpunit
+phpcs.xml
+phpunit.xml
+.phpunit.result.cache
+
+# misc
+build
+coverage
