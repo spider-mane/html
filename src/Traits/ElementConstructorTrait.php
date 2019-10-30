@@ -25,6 +25,10 @@ trait ElementConstructorTrait
     {
         foreach ($attributesArray as $attr => $val) {
 
+            if ($val instanceof HtmlAttributeInterface) {
+                $val->parse();
+            }
+
             if ('' === $val || null === $val) {
                 continue;
             }
