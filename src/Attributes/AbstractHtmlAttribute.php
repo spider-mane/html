@@ -18,7 +18,7 @@ abstract class AbstractHtmlAttribute implements HtmlAttributeInterface
      */
     public function __toString()
     {
-        return $this->getAttrStr();
+        return $this->parse();
     }
 
     /**

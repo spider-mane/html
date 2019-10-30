@@ -12,6 +12,7 @@ $attributes = [
 
 $content = 'This is a test';
 
-$tag = Html::tag('div', $content, $attributes);
+$tag = Html::tag('h1', $content, $attributes);
 
 var_dump($tag);
+echo $tag;

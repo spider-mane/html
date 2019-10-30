@@ -9,7 +9,7 @@
 
 Clean interface for programmatically creating and manipulating html strings. Useful where desired output depends on various conditions or is otherwise fairly complex, but too brief to justify a template.
 
-This project is still in early development, but probably mostly stable.
+This project is still in early development.
 
 ## Install
 

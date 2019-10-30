@@ -13,76 +13,85 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function parseAttributes($attributesArray)
+    protected static function parseAttributes($attributesArray, $options)
     {
-        return static::_parseAttributes($attributesArray);
+        return static::_parseAttributes($attributesArray, $options);
     }
 
     /**
      *
      */
-    private static function _parseAttributes($attributesArray, &$attrStr = '')
+    private static function _parseAttributes($attributesArray, $options, &$attrStr = '')
     {
         foreach ($attributesArray as $attr => $val) {
 
-            if ($val instanceof HtmlAttributeInterface) {
-                $attrStr .= " {$val->getAttrStr()}";
-            }
-
+            // don't add empty strings or null values
             if ('' === $val || null === $val) {
                 continue;
             }
 
-            if (is_string($val) || is_int($val)) {
-                $val = is_string($val) ? "\"{$val}\"" : $val;
-                $attrStr .= " {$attr}={$val}";
+            // simple attribute
+            if (is_string($val) || is_numeric($val)) {
+                $attrStr .= static::attribute($attr, $val, true, $options);
+                continue;
+            }
+
+            // support interface for defining custom parsing schemes
+            if ($val instanceof HtmlAttributeInterface) {
+                $attrStr .= static::attribute($attr, $val->parse(), true, $options);
                 continue;
             }
 
             // boolean attribute
             if ($val === true) {
-                $attrStr .= " {$attr}=\"{$attr}\"";
+                $attrStr .= static::attribute($attr, $attr, true, $options);
                 continue;
             }
 
+            // treat numerical keys as boolean values
             if (is_int($attr)) {
-                $attrStr .= " {$val}=\"{$val}\"";
+                $attrStr .= static::attribute($val, $val, true, $options);
                 continue;
             }
 
-            // val is array of boolean values
-            if (is_array($val) && $attr === '@boolean') {
-                foreach ($val as $bool) {
-                    $attrStr .= " {$bool}=\"{$bool}\"";
+            // support for passing an array of boolean values
+            if ('@boolean' === $attr) {
+                foreach ((array) $val as $bool) {
+                    $attrStr .= static::attribute($bool, $bool, true, $options);
                 }
                 continue;
             }
 
-            // $val represents token list
+            // support for converting indexed array to DOMTokenList
             if (is_array($val) && isset($val[0])) {
                 $val = implode(' ', array_filter($val));
-                $attrStr .= " {$attr}=\"{$val}\"";
+                $attrStr .= static::attribute($attr, $val, true, $options);
                 continue;
             }
 
-            // $val represents a map
+            // support for converting associative array to DOMStringMap
             if (is_array($val)) {
                 foreach ($val as $set => $setval) {
-                    static::_parseAttributes(["{$attr}-{$set}" => $setval], $attrStr);
+                    static::_parseAttributes(["{$attr}-{$set}" => $setval], $options, $attrStr);
                 }
                 continue;
             }
         }
 
-        return ltrim($attrStr);
+        return ltrim(($attrStr));
     }
 
     /**
      *
      */
-    private static function attribute($attribute, $value, $space = false)
+    protected static function attribute($attribute, $value, $space = false, $options = [])
     {
         $space = $space ? ' ' : '';
+
+        $flags = $options['flags'] ?? null;
+        $encode = $options['encoding'] ?? null;
+
+        $value = htmlspecialchars($value, $flags, $encode, false);
 
         return "{$space}{$attribute}=\"{$value}\"";
     }
@@ -90,39 +99,9 @@ trait ElementConstructorTrait
     /**
      *
      */
-    private static function resolvesToAttribute($attr, $val)
-    {
-        return is_string($val) || is_int($val);
-    }
-
-    /**
-     *
-     */
-    private static function resolvesToBooleanAttribute($attr, $val)
-    { }
-
-    /**
-     *
-     */
-    private static function resolvesToTokenListAttribute($attr, $val)
-    { }
-
-    /**
-     *
-     */
-    private static function resolvesToMapAttribute($attr, $val)
-    { }
-
-    /**
-     *
-     */
     protected static function open(string $tag, $attributes = null, $options = [])
     {
-        if (!is_string($attributes) && is_array($attributes)) {
-            $attributes = static::parseAttributes($attributes);
-        }
-
-        $attributes = isset($attributes) ? " {$attributes}" : '';
+        $attributes = isset($attributes) ? ' ' . static::parseAttributes($attributes, $options) : '';
 
         $newLine = static::newLine($options['new_line'] ?? false);
         $indentation = static::indentation($options['indentation'] ?? 0);
@@ -148,9 +127,9 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function tag(string $tag, ?string $content = '', $attributes = null)
+    protected static function tag(string $tag, ?string $content = '', $attributes = null, $options = [])
     {
-        return static::open($tag, $attributes) . $content . static::close($tag);
+        return static::open($tag, $attributes, $options) . $content . static::close($tag, $options);
     }
 
     /**

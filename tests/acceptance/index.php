@@ -18,4 +18,5 @@ require "../../vendor/autoload.php";
 ################################################################################
 
 require "static.php";
+echo "<br>";
 require "instance.php";
