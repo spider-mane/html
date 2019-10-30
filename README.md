@@ -7,23 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
-
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
-```
-bin/
-build/
-docs/
-config/
-src/
-tests/
-vendor/
-```
+Cleaner way to create html strings. Still in early development, but probably mostly stable
 
 ## Install
 
@@ -36,8 +20,19 @@ $ composer require webtheory/html
 ## Usage
 
 ```php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+use WebTheory\Html\Html;
+use WebTheory\Html\Attributes\ClassList;
+
+$age = 24;
+
+$attributes = [
+    'id' => $age >= 21 ? 'real-id' : 'fake-id',
+    'class' => new ClassList(['dummy-class dummy-class-2']),
+];
+
+$content = 'This is a test';
+
+echo Html::tag('div', $content, $attributes);
 ```
 
 ## Change log
@@ -69,14 +64,14 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/webtheory/html.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/webtheory/html/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/webtheory/html.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/webtheory/html.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/spider-mane/html/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/spider-mane/html.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/spider-mane/html.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/webtheory/html.svg?style=flat-square
 [link-packagist]: https://packagist.org/packages/webtheory/html
-[link-travis]: https://travis-ci.org/webtheory/html
-[link-scrutinizer]: https://scrutinizer-ci.com/g/webtheory/html/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/webtheory/html
+[link-travis]: https://travis-ci.org/spider-mane/html
+[link-scrutinizer]: https://scrutinizer-ci.com/g/spider-mane/html/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/spider-mane/html
 [link-downloads]: https://packagist.org/packages/webtheory/html
 [link-author]: https://github.com/spider-mane
 [link-contributors]: ../../contributors
