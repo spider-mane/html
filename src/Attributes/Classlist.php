@@ -16,17 +16,35 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
     /**
      *
      */
-    public function set($classlist)
+    public function __construct($value = [])
     {
-        $this->value = $classlist;
+        $this->set($value);
     }
 
     /**
      *
      */
-    public function add(string $class)
+    public function set($classlist)
     {
-        $this->value[] = $class;
+        if (is_string($classlist)) {
+            $this->value = $this->tokenize($classlist);
+        } elseif (is_array($classlist)) {
+            $this->value = $classlist;
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function add(string $list)
+    {
+        $list = $this->tokenize($list);
+
+        foreach ((array) $list as $class) {
+            $this->value[] = $class;
+        }
 
         return $this;
     }
@@ -70,7 +88,7 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
      */
     public function parse(): string
     {
-        return implode(' ', $this->value);
+        return implode(' ', (array) $this->value);
     }
 
     /**

@@ -10,18 +10,21 @@ abstract class AbstractHtmlAttribute implements HtmlAttributeInterface
      *
      */
     protected $attribute;
+
+    protected const ATTRIBUTE = null;
+
     /**
      *
      */
     public function __toString()
     {
-        return $this->getAttribute();
+        return $this->getAttrStr();
     }
 
     /**
      *
      */
-    public function getAttribute(): string
+    public function getAttrStr(): string
     {
         $attr = $this::ATTRIBUTE ?? $this->attrubute;
         $val = $this->parse();

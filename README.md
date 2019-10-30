@@ -7,17 +7,21 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Cleaner way to create html strings. Still in early development, but probably mostly stable
+Clean interface for programmatically creating and manipulating html strings. Useful where desired output depends on various conditions or is otherwise fairly complex, but too brief to justify a template.
+
+This project is still in early development, but probably mostly stable.
 
 ## Install
 
 Via Composer
 
 ```bash
-$ composer require webtheory/html
+composer require webtheory/html
 ```
 
 ## Usage
+
+Create one-offs by using the Html static class:
 
 ```php
 use WebTheory\Html\Html;
@@ -35,6 +39,12 @@ $content = 'This is a test';
 echo Html::tag('div', $content, $attributes);
 ```
 
+Or create reusable elements by extending the AbstractHtmlElement class:
+
+```php
+
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
@@ -42,7 +52,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ```bash
-$ composer test
+composer test
 ```
 
 ## Contributing

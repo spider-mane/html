@@ -26,7 +26,7 @@ trait ElementConstructorTrait
         foreach ($attributesArray as $attr => $val) {
 
             if ($val instanceof HtmlAttributeInterface) {
-                $val->parse();
+                $attrStr .= " {$val->getAttrStr()}";
             }
 
             if ('' === $val || null === $val) {
@@ -51,7 +51,7 @@ trait ElementConstructorTrait
             }
 
             // val is array of boolean values
-            if (is_array($val) && $attr === 'boolean_attributes') {
+            if (is_array($val) && $attr === '@boolean') {
                 foreach ($val as $bool) {
                     $attrStr .= " {$bool}=\"{$bool}\"";
                 }
