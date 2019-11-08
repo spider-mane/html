@@ -31,12 +31,12 @@ $age = 24;
 
 $attributes = [
     'id' => $age >= 21 ? 'real-id' : 'fake-id',
-    'class' => new ClassList(['dummy-class dummy-class-2']),
+    'class' => new ClassList(['dummy-class', 'dummy-class-2']),
 ];
 
 $content = 'This is a test';
 
-echo Html::tag('div', $content, $attributes);
+echo Html::tag('h1', $content, $attributes);
 ```
 
 Or create reusable elements by extending the AbstractHtmlElement class:

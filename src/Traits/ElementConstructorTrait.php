@@ -78,7 +78,7 @@ trait ElementConstructorTrait
             }
         }
 
-        return ltrim(($attrStr));
+        return ltrim($attrStr);
     }
 
     /**
