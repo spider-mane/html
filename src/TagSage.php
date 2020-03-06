@@ -8,6 +8,8 @@
 
 namespace WebTheory\Html;
 
+use Exception;
+
 class TagSage
 {
     /**
@@ -89,9 +91,7 @@ class TagSage
      */
     public static function isIt($query, $value)
     {
-        $answer = in_array($value, Self::$$query) ? true : false;
-
-        return $answer;
+        return in_array($value, static::$$query);
     }
 
     /**
@@ -99,31 +99,19 @@ class TagSage
      */
     public static function whatAre($these)
     {
-        switch ($these) {
-            case 'self_closing_tags':
-                return Self::$self_closing;
+        $values = [
+            'self_closing_tags' => static::$self_closing,
+            'whitespace_sensitive_tags' => static::$whitespace_sensitive,
+            'standard_form_elements' => static::$standard_form_element,
+            'standard_input_types' => static::$standard_input_type
+        ];
 
-            case 'whitespace_sensitive_tags':
-                return Self::$whitespace_sensitive;
+        $response = $values[$these] ?? null;
 
-            case 'standard_form_elements':
-                return Self::$standard_form_element;
-
-            case 'standard_input_types':
-                return Self::$standard_input_type;
+        if (!$response) {
+            throw new Exception("\"{$these}\" is not a valid inquiry.");
         }
-    }
 
-    /**
-     * To be called on load if browser info has been requested.
-     * Used to modify property arrays based on browser info.
-     *
-     * @todo actually make it
-     *
-     * @param string $browser current browser
-     */
-    public static function ponder($browser)
-    {
-        // code here
+        return $response;
     }
 }
