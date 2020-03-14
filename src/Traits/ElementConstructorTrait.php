@@ -15,13 +15,13 @@ trait ElementConstructorTrait
      */
     protected static function parseAttributes($attributesArray, $options)
     {
-        return static::parseAttributeSwitch($attributesArray, $options);
+        return static::parseAttributesRealSwitch($attributesArray, $options);
     }
 
     /**
      *
      */
-    private static function parseAttributeReal($attributesArray, $options, &$attrStr = '')
+    final private static function parseAttributesReal($attributesArray, $options, &$attrStr = '')
     {
         foreach ($attributesArray as $attr => $val) {
 
@@ -72,7 +72,7 @@ trait ElementConstructorTrait
             // support for converting associative array to DOMStringMap
             if (is_array($val)) {
                 foreach ($val as $set => $setval) {
-                    static::parseAttributeReal(["{$attr}-{$set}" => $setval], $options, $attrStr);
+                    static::parseAttributesReal(["{$attr}-{$set}" => $setval], $options, $attrStr);
                 }
                 continue;
             }
@@ -84,7 +84,7 @@ trait ElementConstructorTrait
     /**
      *
      */
-    private static function parseAttributeSwitch($attributesArray, $options, &$attrStr = '')
+    final private static function parseAttributesRealSwitch($attributesArray, $options, &$attrStr = '')
     {
         foreach ($attributesArray as $attr => $val) {
 
@@ -129,7 +129,7 @@ trait ElementConstructorTrait
                     // support for converting associative array to DOMStringMap
                 case (is_array($val)):
                     foreach ($val as $set => $setval) {
-                        static::parseAttributeSwitch(["{$attr}-{$set}" => $setval], $options, $attrStr);
+                        static::parseAttributesRealSwitch(["{$attr}-{$set}" => $setval], $options, $attrStr);
                     }
                     break;
             }
