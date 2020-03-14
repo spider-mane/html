@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @package Leonidas
- */
-
 namespace WebTheory\Html;
 
 use WebTheory\Html\Attributes\Classlist;

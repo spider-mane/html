@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @package Leonidas Core
- *
- * Helper class to determine whether or not a tag meets a certain criteria
- */
-
 namespace WebTheory\Html;
 
 use Exception;
