@@ -249,6 +249,16 @@ abstract class AbstractHtmlElement
     /**
      *
      */
+    public function toHtml(): string
+    {
+        $this->resolveAttributes();
+
+        return $this->renderHtmlMarkup();
+    }
+
+    /**
+     *
+     */
     final public function __toString()
     {
         return $this->toHtml();
@@ -257,5 +267,5 @@ abstract class AbstractHtmlElement
     /**
      *
      */
-    abstract public function toHtml(): string;
+    abstract protected function renderHtmlMarkup(): string;
 }
