@@ -238,7 +238,7 @@ abstract class AbstractHtmlElement
     /**
      *
      */
-    protected function resolveAttributes()
+    protected function resolveAttributes(): AbstractHtmlElement
     {
         return $this
             ->addAttribute('id', $this->id)
@@ -251,9 +251,7 @@ abstract class AbstractHtmlElement
      */
     public function toHtml(): string
     {
-        $this->resolveAttributes();
-
-        return $this->renderHtmlMarkup();
+        return $this->resolveAttributes()->renderHtmlMarkup();
     }
 
     /**
