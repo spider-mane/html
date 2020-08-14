@@ -4,6 +4,9 @@ namespace WebTheory\Html;
 
 use JsonSerializable;
 
+/**
+ * @deprecated version 0.2.0
+ */
 class HtmlMap implements JsonSerializable
 {
     /**
@@ -67,7 +70,7 @@ class HtmlMap implements JsonSerializable
                 $html .= $this->constructHtml($childMap, true);
             }
 
-            $html .= Html::close($definition['tag']);
+            $html .= Html::maybeClose($definition['tag']);
             $markedUp[] = $currentElement;
         }
 
