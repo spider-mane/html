@@ -13,17 +13,17 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function parseAttributes($attributesArray): string
+    protected static function parseAttributes(array $attributes): string
     {
-        return static::parseAttributesRealSwitch($attributesArray);
+        return static::parseAttributesRealSwitch($attributes);
     }
 
     /**
      *
      */
-    protected static function parseAttributesReal($attributesArray, &$attrStr = ''): string
+    private static function parseAttributesReal(array $attrArr, string &$attrStr = ''): string
     {
-        foreach ($attributesArray as $attr => $val) {
+        foreach ($attrArr as $attr => $val) {
 
             // don't add empty strings or null values
             if ('' === $val && 'value' !== $attr || null === $val) {
@@ -32,32 +32,32 @@ trait ElementConstructorTrait
 
             // simple attribute
             if (is_string($val) || is_numeric($val)) {
-                $attrStr .= static::renderAttribute($attr, $val, true);
+                $attrStr .= static::renderAttribute($attr, $val);
                 continue;
             }
 
             // support interface for defining custom parsing schemes
             if ($val instanceof HtmlAttributeInterface) {
-                $attrStr .= static::renderAttribute($attr, $val->parse(), true);
+                $attrStr .= static::renderAttribute($attr, $val->parse());
                 continue;
             }
 
             // boolean attribute
             if ($val === true) {
-                $attrStr .= static::renderAttribute($attr, $attr, true);
+                $attrStr .= static::renderAttribute($attr, $attr);
                 continue;
             }
 
             // treat numerical keys as boolean values
             if (is_int($attr)) {
-                $attrStr .= static::renderAttribute($val, $val, true);
+                $attrStr .= static::renderAttribute($val, $val);
                 continue;
             }
 
             // support for passing an array of boolean values
             if ('@boolean' === $attr) {
                 foreach ((array) $val as $bool) {
-                    $attrStr .= static::renderAttribute($bool, $bool, true);
+                    $attrStr .= static::renderAttribute($bool, $bool);
                 }
                 continue;
             }
@@ -65,7 +65,7 @@ trait ElementConstructorTrait
             // support for converting indexed array to DOMTokenList
             if (is_array($val) && isset($val[0])) {
                 $val = implode(' ', array_filter($val));
-                $attrStr .= static::renderAttribute($attr, $val, true);
+                $attrStr .= static::renderAttribute($attr, $val);
                 continue;
             }
 
@@ -78,15 +78,15 @@ trait ElementConstructorTrait
             }
         }
 
-        return ltrim($attrStr);
+        return $attrStr;
     }
 
     /**
      *
      */
-    protected static function parseAttributesRealSwitch($attributesArray, &$attrStr = ''): string
+    private static function parseAttributesRealSwitch(array $attrArr, string &$attrStr = ''): string
     {
-        foreach ($attributesArray as $attr => $val) {
+        foreach ($attrArr as $attr => $val) {
 
             switch (true) {
                     // don't add empty strings or null values
@@ -135,7 +135,7 @@ trait ElementConstructorTrait
             }
         }
 
-        return ltrim($attrStr);
+        return $attrStr;
     }
 
     /**
@@ -143,7 +143,7 @@ trait ElementConstructorTrait
      */
     protected static function renderAttribute($attribute, $value): string
     {
-        $value = static::escAttr($value);
+        $value = static::escapeAttribute($value);
 
         return " {$attribute}=\"{$value}\"";
     }
@@ -151,7 +151,7 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function escAttr($attribute): string
+    protected static function escapeAttribute($attribute): string
     {
         return htmlspecialchars($attribute);
     }
@@ -194,17 +194,17 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function maybeAddSlash(string $tag): string
+    protected static function maybeParseAttributes(array $attributes): string
     {
-        return static::tagIsVoid($tag) ? ' /' : '';
+        return empty($attributes) ? '' : static::parseAttributes($attributes);
     }
 
     /**
      *
      */
-    protected static function maybeParseAttributes(array $attributes): string
+    protected static function maybeAddSlash(string $tag): string
     {
-        return !empty($attributes) ? ' ' . static::parseAttributes($attributes) : '';
+        return static::tagIsVoid($tag) ? ' /' : '';
     }
 
     /**
@@ -228,6 +228,6 @@ trait ElementConstructorTrait
      */
     protected static function newLine(bool $newLine = false): string
     {
-        return true === $newLine ? "\n" : '';
+        return $newLine ? "\n" : '';
     }
 }

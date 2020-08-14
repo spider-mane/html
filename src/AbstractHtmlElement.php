@@ -13,11 +13,6 @@ abstract class AbstractHtmlElement
     /**
      * @var string
      */
-    protected $charset = 'UTF-8';
-
-    /**
-     * @var string
-     */
     public $id = '';
 
     /**
@@ -34,6 +29,11 @@ abstract class AbstractHtmlElement
      * @var array
      */
     protected $attributes = [];
+
+    /**
+     * @var string
+     */
+    protected $charset = 'UTF-8';
 
     /**
      *
@@ -57,7 +57,7 @@ abstract class AbstractHtmlElement
     /**
      *
      */
-    public function setCharset($charset)
+    public function setCharset($charset): AbstractHtmlElement
     {
         $this->charset = $charset;
 
@@ -81,7 +81,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function setId(string $id)
+    public function setId(string $id): AbstractHtmlElement
     {
         $this->id = $id;
 
@@ -105,7 +105,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function setClasslist(array $classlist)
+    public function setClasslist(array $classlist): AbstractHtmlElement
     {
         $this->classlist->set($classlist);
 
@@ -119,7 +119,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function addClass(string $class)
+    public function addClass(string $class): AbstractHtmlElement
     {
         $this->classlist->add($class);
 
@@ -133,7 +133,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function removeClass(string $class)
+    public function removeClass(string $class): AbstractHtmlElement
     {
         $this->classlist->remove($class);
 
@@ -157,7 +157,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function setStyles(array $styles)
+    public function setStyles(array $styles): AbstractHtmlElement
     {
         foreach ($styles as $property => $value) {
             $this->addStyle($property, $value);
@@ -174,7 +174,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function addStyle(string $property, string $value)
+    public function addStyle(string $property, string $value): AbstractHtmlElement
     {
         $this->styles->set($property, $value);
 
@@ -188,7 +188,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function removeStyle(string $style)
+    public function removeStyle(string $style): AbstractHtmlElement
     {
         $this->styles->remove($style);
 
@@ -212,7 +212,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): AbstractHtmlElement
     {
         foreach ($attributes as $key => $value) {
             $this->addAttribute($key, $value);
@@ -228,7 +228,7 @@ abstract class AbstractHtmlElement
      *
      * @return self
      */
-    public function addAttribute($attribute, $value)
+    public function addAttribute($attribute, $value): AbstractHtmlElement
     {
         $this->attributes[$attribute] = $value;
 

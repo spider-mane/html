@@ -27,7 +27,7 @@ class TagSage
     ];
 
     /**
-     * Array of whitespace sensitice tags
+     * Array of whitespace sensitive tags
      */
     protected static $whitespace_sensitive = [
         'textarea',
@@ -83,15 +83,15 @@ class TagSage
     /**
      *
      */
-    public static function isIt($query, $value)
+    public static function isIt(string $query, string $value): bool
     {
-        return in_array($value, static::$$query);
+        return in_array($value, static::${$query});
     }
 
     /**
      *
      */
-    public static function whatAre($these)
+    public static function whatAre(string $these): array
     {
         $values = [
             'self_closing_tags' => static::$self_closing,

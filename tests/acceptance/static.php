@@ -15,17 +15,17 @@ $content = 'This is a test';
 $tag = Html::tag('h1', $attributes, $content);
 
 echo $tag;
-var_dump($tag);
+echo Html::code(htmlspecialchars($tag));
 echo '<hr>';
 
 ################################################################################
 #
 ################################################################################
 
-$h1 = Html::h1('This is a magic test');
+$h1 = Html::h1('This is a magic test', $attributes);
 
 echo $h1;
-var_dump($h1);
+echo Html::code(htmlspecialchars($h1));
 echo '<hr>';
 
 ################################################################################
@@ -36,7 +36,8 @@ $input = Html::input(['type' => 'range']);
 
 echo 'Magic Void Element' . '<br>';
 echo $input;
-var_dump($input);
+echo '<br>';
+echo Html::code(htmlspecialchars($input));
 echo '<hr>';
 
 ################################################################################
