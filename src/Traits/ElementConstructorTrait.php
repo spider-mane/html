@@ -218,7 +218,7 @@ trait ElementConstructorTrait
     /**
      *
      */
-    protected static function indentation(int $levels = 0): string
+    protected static function indent(int $levels = 0): string
     {
         return str_repeat('&nbsp;', $levels);
     }
