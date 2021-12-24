@@ -1,6 +1,6 @@
 <?php
 
-namespace WebTheory\Html;
+namespace WebTheory\Html\Contracts;
 
 interface HtmlMarkupInterface
 {
