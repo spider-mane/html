@@ -1,14 +1,40 @@
 <?xml version="1.0"?>
-<ruleset name="html">
-    <description>The coding standard of html package</description>
-    <arg value="p" />
+<ruleset
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+  name="html"
+>
+  <description>Coding standard for webtheory/html</description>
 
-    <config name="ignore_warnings_on_exit" value="1" />
-    <config name="ignore_errors_on_exit" value="1" />
+  <!-- Paths -->
+  <file>./src</file>
+  <file>./tests</file>
 
-    <arg name="colors" />
-    <arg value="s" />
+  <!-- Args -->
+  <arg value="p"/>
+  <arg value="s"/>
+  <arg name="colors"/>
 
-    <!-- Use the PSR2 Standard-->
-    <rule ref="PSR2" />
+  <!-- Config -->
+  <config name="ignore_warnings_on_exit"
+    value="1"/>
+
+  <config name="ignore_errors_on_exit"
+    value="1"/>
+
+  <config name="default_standard"
+    value="PSR12"/>
+
+  <!-- Use the PSR-12 Standard-->
+  <rule ref="PSR12"/>
+
+  <!-- Disable Default Squiz Checks -->
+  <rule ref="Squiz">
+    <exclude name="Squiz"/>
+  </rule>
+
+  <!-- Disable camel case method name rule for tests -->
+  <rule ref="PSR1.Methods.CamelCapsMethodName">
+    <exclude-pattern>./tests/Suites</exclude-pattern>
+  </rule>
 </ruleset>

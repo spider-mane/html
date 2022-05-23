@@ -1,18 +1,31 @@
-# editor/ IDE
-.idea
-.project
-.vscode/
-*.code-workspace
+# Dev and CI
+*.cache
+/.playground
+/.playground.php
+/build/
+/dist/
+/logs/
+/temp/
+captainhook.config.json
+cghooks.lock
+docker-compose.override.yml
 
-# composer
-vendor
+# Composer
+/vendor/
 composer.lock
 
-# phpunit
-phpcs.xml
-phpunit.xml
-.phpunit.result.cache
+# Env
+*.env
+.env.*
+.*.env
+!.env.example
 
-# misc
-build
-coverage
+# Editor/ IDE
+*.code-workspace
+.idea/
+.project/
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db

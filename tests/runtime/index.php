@@ -1,17 +1,13 @@
 <?php
 
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
-
 ################################################################################
 # bootstrap
 ################################################################################
 
-# composer autoload
-require "../../vendor/autoload.php";
+$base = dirname(__DIR__);
+$root = dirname(__DIR__, 2);
 
-# filp/whoops error handling
-(new Run)->prependHandler(new PrettyPageHandler)->register();
+require "$base/bootstrap.php";
 
 ################################################################################
 # start
