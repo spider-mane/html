@@ -170,6 +170,9 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     protected function resolveAttributes(): AbstractHtmlElement
     {
         return $this
@@ -183,7 +186,7 @@ abstract class AbstractHtmlElement
         return $this->resolveAttributes()->renderHtmlMarkup();
     }
 
-    final public function __toString()
+    final public function __toString(): string
     {
         return $this->toHtml();
     }
