@@ -55,7 +55,7 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     *
+     * @return $this
      */
     public function setCharset($charset): AbstractHtmlElement
     {
@@ -79,7 +79,7 @@ abstract class AbstractHtmlElement
      *
      * @param string  $id
      *
-     * @return self
+     * @return $this
      */
     public function setId(string $id): AbstractHtmlElement
     {
@@ -103,7 +103,7 @@ abstract class AbstractHtmlElement
      *
      * @param array $classlist
      *
-     * @return self
+     * @return $this
      */
     public function setClasslist(array $classlist): AbstractHtmlElement
     {
@@ -115,9 +115,9 @@ abstract class AbstractHtmlElement
     /**
      * Set the value of classlist
      *
-     * @param array $class
+     * @param string $class
      *
-     * @return self
+     * @return $this
      */
     public function addClass(string $class): AbstractHtmlElement
     {
@@ -131,7 +131,7 @@ abstract class AbstractHtmlElement
      *
      * @param string $class
      *
-     * @return self
+     * @return $this
      */
     public function removeClass(string $class): AbstractHtmlElement
     {
@@ -155,7 +155,7 @@ abstract class AbstractHtmlElement
      *
      * @param array $styles
      *
-     * @return self
+     * @return $this
      */
     public function setStyles(array $styles): AbstractHtmlElement
     {
@@ -172,7 +172,7 @@ abstract class AbstractHtmlElement
      * @param string $property
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function addStyle(string $property, string $value): AbstractHtmlElement
     {
@@ -186,7 +186,7 @@ abstract class AbstractHtmlElement
      *
      * @param string $style
      *
-     * @return self
+     * @return $this
      */
     public function removeStyle(string $style): AbstractHtmlElement
     {
@@ -210,7 +210,7 @@ abstract class AbstractHtmlElement
      *
      * @param array  $attributes
      *
-     * @return self
+     * @return $this
      */
     public function setAttributes(array $attributes): AbstractHtmlElement
     {
@@ -226,7 +226,7 @@ abstract class AbstractHtmlElement
      *
      * @param array $attribute
      *
-     * @return self
+     * @return $this
      */
     public function addAttribute($attribute, $value): AbstractHtmlElement
     {

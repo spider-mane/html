@@ -14,9 +14,9 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
     protected const ATTRIBUTE = 'style';
 
     /**
-     *
+     * @return $this
      */
-    public function set($style, $value)
+    public function set($style, $value): Style
     {
         $this->value[$style] = $value;
 
@@ -32,9 +32,9 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
     }
 
     /**
-     *
+     * @return $this
      */
-    public function remove($style)
+    public function remove($style): Style
     {
         unset($this->value[$style]);
 

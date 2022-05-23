@@ -22,9 +22,9 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
     }
 
     /**
-     *
+     * @return $this
      */
-    public function set($classlist)
+    public function set($classlist): Classlist
     {
         if (is_string($classlist)) {
             $this->value = $this->tokenize($classlist);
@@ -36,9 +36,9 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
     }
 
     /**
-     *
+     * @return $this
      */
-    public function add(string $list)
+    public function add(string $list): Classlist
     {
         $list = $this->tokenize($list);
 
@@ -50,9 +50,9 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
     }
 
     /**
-     *
+     * @return $this
      */
-    public function remove($class)
+    public function remove($class): Classlist
     {
         while ($this->contains($class)) {
             unset($this->value[array_search($class, $this->value)]);
@@ -62,9 +62,9 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
     }
 
     /**
-     *
+     * @return $this
      */
-    public function toggle($class)
+    public function toggle($class): Classlist
     {
         if ($this->contains($class)) {
             $this->remove($class);
