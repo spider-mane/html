@@ -6,16 +6,10 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
-    /**
-     *
-     */
     protected $value = [];
 
     protected const ATTRIBUTE = 'class';
 
-    /**
-     *
-     */
     public function __construct($value = [])
     {
         $this->set($value);
@@ -75,25 +69,16 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return $this;
     }
 
-    /**
-     *
-     */
     public function contains($class)
     {
         return in_array($class, $this->value, false);
     }
 
-    /**
-     *
-     */
     public function parse(): string
     {
         return implode(' ', (array) $this->value);
     }
 
-    /**
-     *
-     */
     public function tokenize(string $classlist): array
     {
         return explode(' ', $classlist);

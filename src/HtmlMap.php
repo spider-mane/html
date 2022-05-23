@@ -9,14 +9,8 @@ use JsonSerializable;
  */
 class HtmlMap implements JsonSerializable
 {
-    /**
-     *
-     */
     public $map;
 
-    /**
-     *
-     */
     public function __construct(array $map)
     {
         $this->map = $map;
@@ -29,13 +23,8 @@ class HtmlMap implements JsonSerializable
      * 'attributes' => array || string
      * 'content' => string
      * 'children' => array
-     *
-     * @param array $html_map
-     * @param bool $recall
-     *
-     * @return string
      */
-    protected function constructHtml($map = null, $recall = false)
+    protected function constructHtml(array $map = null, bool $recall = false): string
     {
         static $markedUp;
 
@@ -46,7 +35,6 @@ class HtmlMap implements JsonSerializable
         }
 
         foreach ($map ?? $this->map as $currentElement => $definition) {
-
             if (in_array($currentElement, $markedUp)) {
                 continue;
             }
@@ -55,6 +43,7 @@ class HtmlMap implements JsonSerializable
             if (is_object($definition) && method_exists($definition, '__toString') || is_string($definition)) {
                 $html .= $definition;
                 $markedUp[] = $currentElement;
+
                 continue;
             }
 
@@ -82,33 +71,21 @@ class HtmlMap implements JsonSerializable
         return $html;
     }
 
-    /**
-     *
-     */
     public function toHtml()
     {
         return $this->constructHtml();
     }
 
-    /**
-     *
-     */
     public function toJson()
     {
         return json_encode($this);
     }
 
-    /**
-     *
-     */
     public function jsonSerialize()
     {
         return $this->map;
     }
 
-    /**
-     *
-     */
     public function __toString()
     {
         return $this->toHtml();

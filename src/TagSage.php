@@ -80,24 +80,18 @@ class TagSage
         'week',
     ];
 
-    /**
-     *
-     */
     public static function isIt(string $query, string $value): bool
     {
         return in_array($value, static::${$query});
     }
 
-    /**
-     *
-     */
     public static function whatAre(string $these): array
     {
         $values = [
             'self_closing_tags' => static::$self_closing,
             'whitespace_sensitive_tags' => static::$whitespace_sensitive,
             'standard_form_elements' => static::$standard_form_element,
-            'standard_input_types' => static::$standard_input_type
+            'standard_input_types' => static::$standard_input_type,
         ];
 
         $response = $values[$these] ?? null;

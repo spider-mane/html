@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Variable \\$childMap might not be defined\\.$#"
+			count: 1
+			path: src/HtmlMap.php
+
+		-
+			message: "#^Call to an undefined static method WebTheory\\\\Html\\\\Html\\:\\:code\\(\\)\\.$#"
+			count: 3
+			path: tests/runtime/static.php
+
+		-
+			message: "#^Class WebTheory\\\\Html\\\\Attributes\\\\Classlist referenced with incorrect case\\: WebTheory\\\\Html\\\\Attributes\\\\ClassList\\.$#"
+			count: 2
+			path: tests/runtime/static.php
+
+		-
+			message: "#^Comparison operation \"\\>\\=\" between 24 and 21 is always true\\.$#"
+			count: 1
+			path: tests/runtime/static.php
+
+		-
+			message: "#^Else branch is unreachable because ternary operator condition is always true\\.$#"
+			count: 1
+			path: tests/runtime/static.php

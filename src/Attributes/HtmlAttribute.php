@@ -7,36 +7,27 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 class HtmlAttribute extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
     /**
-     *
-     */
-    protected $attrubute;
-
-    /**
      * @var string
      */
     protected $value;
 
-    /**
-     *
-     */
-    public function __construct($attrubute)
+    public function __construct(string $attribute)
     {
-        $this->attrubute = $attrubute;
+        $this->attribute = $attribute;
     }
 
-    /**
-     *
-     */
     public function setValue($value)
     {
         $this->value = $value;
     }
 
-    /**
-     *
-     */
     public function parse(): string
     {
         return (string) $this->value;
+    }
+
+    public function tokenize(string $attribute): string
+    {
+        return $attribute;
     }
 }

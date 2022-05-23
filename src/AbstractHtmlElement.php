@@ -35,21 +35,13 @@ abstract class AbstractHtmlElement
      */
     protected $charset = 'UTF-8';
 
-    /**
-     *
-     */
     public function __construct()
     {
-        $this->classlist = new Classlist;
-        $this->styles = new Style;
+        $this->classlist = new Classlist();
+        $this->styles = new Style();
     }
 
-    /**
-     * Get the value of charset
-     *
-     * @return mixed
-     */
-    public function getCharset()
+    public function getCharset(): string
     {
         return $this->charset;
     }
@@ -64,21 +56,12 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
-    /**
-     * Get the value of id
-     *
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
-     *
-     * @param string  $id
-     *
      * @return $this
      */
     public function setId(string $id): AbstractHtmlElement
@@ -88,21 +71,12 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
-    /**
-     * Get the value of classlist
-     *
-     * @return array
-     */
     public function getClasslist(): Classlist
     {
         return $this->classlist;
     }
 
     /**
-     * Set the value of classlist
-     *
-     * @param array $classlist
-     *
      * @return $this
      */
     public function setClasslist(array $classlist): AbstractHtmlElement
@@ -113,10 +87,6 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     * Set the value of classlist
-     *
-     * @param string $class
-     *
      * @return $this
      */
     public function addClass(string $class): AbstractHtmlElement
@@ -127,10 +97,6 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     * Set the value of classlist
-     *
-     * @param string $class
-     *
      * @return $this
      */
     public function removeClass(string $class): AbstractHtmlElement
@@ -140,21 +106,12 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
-    /**
-     * Get the value of styles
-     *
-     * @return array
-     */
     public function getStyles(): Style
     {
         return $this->styles;
     }
 
     /**
-     * Set the value of styles
-     *
-     * @param array $styles
-     *
      * @return $this
      */
     public function setStyles(array $styles): AbstractHtmlElement
@@ -167,11 +124,6 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     * Add or overwrite a style
-     *
-     * @param string $property
-     * @param string $value
-     *
      * @return $this
      */
     public function addStyle(string $property, string $value): AbstractHtmlElement
@@ -182,10 +134,6 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     * Remove a style
-     *
-     * @param string $style
-     *
      * @return $this
      */
     public function removeStyle(string $style): AbstractHtmlElement
@@ -195,21 +143,12 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
-    /**
-     * Get the value of attributes
-     *
-     * @return array
-     */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
     /**
-     * Set the value of attributes
-     *
-     * @param array  $attributes
-     *
      * @return $this
      */
     public function setAttributes(array $attributes): AbstractHtmlElement
@@ -222,10 +161,6 @@ abstract class AbstractHtmlElement
     }
 
     /**
-     * Add individual attribute
-     *
-     * @param array $attribute
-     *
      * @return $this
      */
     public function addAttribute($attribute, $value): AbstractHtmlElement
@@ -235,9 +170,6 @@ abstract class AbstractHtmlElement
         return $this;
     }
 
-    /**
-     *
-     */
     protected function resolveAttributes(): AbstractHtmlElement
     {
         return $this
@@ -246,24 +178,15 @@ abstract class AbstractHtmlElement
             ->addAttribute('style', $this->styles->parse());
     }
 
-    /**
-     *
-     */
     public function toHtml(): string
     {
         return $this->resolveAttributes()->renderHtmlMarkup();
     }
 
-    /**
-     *
-     */
     final public function __toString()
     {
         return $this->toHtml();
     }
 
-    /**
-     *
-     */
     abstract protected function renderHtmlMarkup(): string;
 }

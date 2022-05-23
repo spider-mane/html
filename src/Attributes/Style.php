@@ -6,9 +6,6 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
-    /**
-     *
-     */
     public $value = [];
 
     protected const ATTRIBUTE = 'style';
@@ -23,9 +20,6 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return $this;
     }
 
-    /**
-     *
-     */
     public function get($style)
     {
         return $this->value[$style];
@@ -41,17 +35,11 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return $this;
     }
 
-    /**
-     *
-     */
     public function contains($style)
     {
         return isset($this->value[$style]);
     }
 
-    /**
-     *
-     */
     public function parse(): string
     {
         $str = '';
@@ -63,9 +51,6 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return rtrim($str, ' ');
     }
 
-    /**
-     *
-     */
     public function tokenize(string $styles): array
     {
         $styles = explode(';', $styles);

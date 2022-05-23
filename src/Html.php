@@ -5,17 +5,17 @@ namespace WebTheory\Html;
 use WebTheory\Html\Traits\ElementConstructorTrait;
 
 /**
- * @method static string div(string $inner = '', array attributes = [])
- * @method static string span(string $inner = '', array attributes = [])
- * @method static string main(string $inner = '', array attributes = [])
- * @method static string form(string $inner = '', array attributes = [])
- * @method static string h1(string $inner = '', array attributes = [])
- * @method static string h2(string $inner = '', array attributes = [])
- * @method static string h3(string $inner = '', array attributes = [])
- * @method static string h4(string $inner = '', array attributes = [])
- * @method static string h5(string $inner = '', array attributes = [])
- * @method static string h6(string $inner = '', array attributes = [])
- * @method static string input(array attributes = [])
+ * @method static string div(string $inner = '', array $attributes = [])
+ * @method static string span(string $inner = '', array $attributes = [])
+ * @method static string main(string $inner = '', array $attributes = [])
+ * @method static string form(string $inner = '', array $attributes = [])
+ * @method static string h1(string $inner = '', array $attributes = [])
+ * @method static string h2(string $inner = '', array $attributes = [])
+ * @method static string h3(string $inner = '', array $attributes = [])
+ * @method static string h4(string $inner = '', array $attributes = [])
+ * @method static string h5(string $inner = '', array $attributes = [])
+ * @method static string h6(string $inner = '', array $attributes = [])
+ * @method static string input(array $attributes = [])
  */
 class Html
 {
@@ -27,9 +27,6 @@ class Html
         tagIsVoid as public;
     }
 
-    /**
-     *
-     */
     public static function attributes(array $attributes, bool $trim = true)
     {
         $attributes = static::parseAttributes($attributes);
@@ -37,9 +34,6 @@ class Html
         return $trim ? ltrim($attributes) : $attributes;
     }
 
-    /**
-     *
-     */
     public static function __callStatic($tag, $args)
     {
         if (static::tagIsVoid($tag)) {
