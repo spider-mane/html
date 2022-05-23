@@ -16,22 +16,12 @@ class HtmlElement extends AbstractHtmlElement
         parent::__construct();
     }
 
-    /**
-     * Get the value of tag
-     *
-     * @return mixed
-     */
-    public function getTag()
+    public function getTag(): string
     {
         return $this->tag;
     }
 
-    /**
-     * Get the value of innerHtml
-     *
-     * @return mixed
-     */
-    public function getInnerHtml()
+    public function getInnerHtml(): string
     {
         return $this->innerHtml;
     }

@@ -16,9 +16,12 @@ class HtmlAttribute extends AbstractHtmlAttribute implements HtmlAttributeInterf
         $this->attribute = $attribute;
     }
 
+    /**
+     * @param string|int|null $value
+     */
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     public function parse(): string
@@ -26,8 +29,12 @@ class HtmlAttribute extends AbstractHtmlAttribute implements HtmlAttributeInterf
         return (string) $this->value;
     }
 
-    public function tokenize(string $attribute): string
+    public function tokenize(string $attribute): array
     {
-        return $attribute;
+        $split = explode('=', $attribute);
+        $attribute = $split[0];
+        $value = htmlspecialchars_decode(str_replace('"', '', $split[1] ?? ''));
+
+        return [$attribute => $value];
     }
 }

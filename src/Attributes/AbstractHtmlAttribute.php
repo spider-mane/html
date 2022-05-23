@@ -13,7 +13,7 @@ abstract class AbstractHtmlAttribute implements HtmlAttributeInterface
 
     protected const ATTRIBUTE = null;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->parse();
     }

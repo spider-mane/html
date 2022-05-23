@@ -6,5 +6,5 @@ interface HtmlMarkupInterface
 {
     public function toHtml(): string;
 
-    public function __toString();
+    public function __toString(): string;
 }

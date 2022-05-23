@@ -21,6 +21,13 @@ trait ElementConstructorTrait
                 continue;
             }
 
+            // treat numerical keys as boolean values
+            if (is_int($attr)) {
+                $attrStr .= static::renderAttribute($val, (string) $val);
+
+                continue;
+            }
+
             // simple attribute
             if (is_string($val) || is_numeric($val)) {
                 $attrStr .= static::renderAttribute($attr, $val);
@@ -38,13 +45,6 @@ trait ElementConstructorTrait
             // boolean attribute
             if ($val === true) {
                 $attrStr .= static::renderAttribute($attr, $attr);
-
-                continue;
-            }
-
-            // treat numerical keys as boolean values
-            if (is_int($attr)) {
-                $attrStr .= static::renderAttribute($val, $val);
 
                 continue;
             }
@@ -87,6 +87,12 @@ trait ElementConstructorTrait
                 case ('' === $val && 'value' !== $attr || null === $val):
                     break;
 
+                    // treat numerical keys as boolean values
+                case (is_int($attr)):
+                    $attrStr .= static::renderAttribute($val, (string) $val);
+
+                    break;
+
                     // simple attribute
                 case (is_string($val) || is_numeric($val)):
                     $attrStr .= static::renderAttribute($attr, $val);
@@ -102,12 +108,6 @@ trait ElementConstructorTrait
                     // boolean attribute
                 case ($val === true):
                     $attrStr .= static::renderAttribute($attr, $attr);
-
-                    break;
-
-                    // treat numerical keys as boolean values
-                case (is_int($attr)):
-                    $attrStr .= static::renderAttribute($val, $val);
 
                     break;
 
@@ -139,14 +139,14 @@ trait ElementConstructorTrait
         return $attrStr;
     }
 
-    protected static function renderAttribute($attribute, $value): string
+    protected static function renderAttribute(string $attribute, string $value): string
     {
         $value = static::escapeAttribute($value);
 
         return " {$attribute}=\"{$value}\"";
     }
 
-    protected static function escapeAttribute($attribute): string
+    protected static function escapeAttribute(string $attribute): string
     {
         return htmlspecialchars($attribute);
     }

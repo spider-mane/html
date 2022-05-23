@@ -49,7 +49,7 @@ abstract class AbstractHtmlElement
     /**
      * @return $this
      */
-    public function setCharset($charset): AbstractHtmlElement
+    public function setCharset(string $charset): AbstractHtmlElement
     {
         $this->charset = $charset;
 

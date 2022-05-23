@@ -27,19 +27,24 @@ class Html
         tagIsVoid as public;
     }
 
-    public static function attributes(array $attributes, bool $trim = true)
+    public static function __callStatic(string $tag, array $args): string
+    {
+        if (static::tagIsVoid($tag)) {
+            $attributes = $args[0] ?? [];
+            $html = static::tag($tag, $attributes);
+        } else {
+            $inner = $args[0] ?? '';
+            $attributes = $args[1] ?? [];
+            $html = static::tag($tag, $attributes, $inner);
+        }
+
+        return $html;
+    }
+
+    public static function attributes(array $attributes, bool $trim = true): string
     {
         $attributes = static::parseAttributes($attributes);
 
         return $trim ? ltrim($attributes) : $attributes;
-    }
-
-    public static function __callStatic($tag, $args)
-    {
-        if (static::tagIsVoid($tag)) {
-            return static::tag($tag, $args[0] ?? []);
-        }
-
-        return static::tag($tag, $args[1] ?? [], $args[0] ?? '');
     }
 }
