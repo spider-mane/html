@@ -2,13 +2,16 @@
 
 namespace WebTheory\Html\Contracts;
 
-interface HtmlAttributeInterface
+use Stringable;
+
+interface HtmlAttributeInterface extends Stringable
 {
     public function parse(): string;
 
-    public function tokenize(string $attribute): array;
+    /**
+     * @return null|string|int|float|bool|array
+     */
+    public function tokenize(string $attribute);
 
     public function getAttrStr(): string;
-
-    public function __toString(): string;
 }

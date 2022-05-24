@@ -6,12 +6,7 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 abstract class AbstractHtmlAttribute implements HtmlAttributeInterface
 {
-    /**
-     * @var string
-     */
-    protected $attribute;
-
-    protected const ATTRIBUTE = null;
+    protected string $name;
 
     public function __toString(): string
     {
@@ -20,9 +15,6 @@ abstract class AbstractHtmlAttribute implements HtmlAttributeInterface
 
     public function getAttrStr(): string
     {
-        $attr = $this::ATTRIBUTE ?? $this->attribute;
-        $val = $this->parse();
-
-        return "{$attr}=\"{$val}\"";
+        return "{$this->name}=\"{$this->parse()}\"";
     }
 }

@@ -4,36 +4,22 @@ namespace WebTheory\Html;
 
 use WebTheory\Html\Attributes\Classlist;
 use WebTheory\Html\Attributes\Style;
+use WebTheory\Html\Contracts\HtmlInterface;
 use WebTheory\Html\Traits\ElementConstructorTrait;
 
-abstract class AbstractHtmlElement
+abstract class AbstractHtmlElement implements HtmlInterface
 {
     use ElementConstructorTrait;
 
-    /**
-     * @var string
-     */
-    public $id = '';
+    public string $id = '';
 
-    /**
-     * @var Classlist
-     */
-    protected $classlist;
+    protected Classlist $classlist;
 
-    /**
-     * @var Style
-     */
-    protected $styles;
+    protected Style $styles;
 
-    /**
-     * @var array
-     */
-    protected $attributes = [];
+    protected array $attributes = [];
 
-    /**
-     * @var string
-     */
-    protected $charset = 'UTF-8';
+    protected string $charset = 'UTF-8';
 
     public function __construct()
     {

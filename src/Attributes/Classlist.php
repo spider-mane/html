@@ -6,9 +6,9 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
-    protected $value = [];
+    protected string $name = 'class';
 
-    protected const ATTRIBUTE = 'class';
+    protected array $value = [];
 
     public function __construct($value = [])
     {
@@ -69,7 +69,7 @@ class Classlist extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return $this;
     }
 
-    public function contains($class)
+    public function contains($class): bool
     {
         return in_array($class, $this->value, false);
     }

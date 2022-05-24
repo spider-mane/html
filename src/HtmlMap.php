@@ -3,13 +3,14 @@
 namespace WebTheory\Html;
 
 use JsonSerializable;
+use WebTheory\Html\Contracts\HtmlInterface;
 
 /**
  * @deprecated version 0.2.0
  */
-class HtmlMap implements JsonSerializable
+class HtmlMap implements HtmlInterface, JsonSerializable
 {
-    public $map;
+    protected array $map;
 
     public function __construct(array $map)
     {
@@ -71,22 +72,22 @@ class HtmlMap implements JsonSerializable
         return $html;
     }
 
-    public function toHtml()
+    public function toHtml(): string
     {
         return $this->constructHtml();
     }
 
-    public function toJson()
+    public function toJson(): string
     {
-        return json_encode($this);
+        return json_encode($this, JSON_THROW_ON_ERROR);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->map;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toHtml();
     }

@@ -2,11 +2,13 @@
 
 namespace WebTheory\Html;
 
-class HtmlElement extends AbstractHtmlElement
-{
-    protected $tag;
+use WebTheory\Html\Contracts\HtmlInterface;
 
-    protected $innerHtml = '';
+class HtmlElement extends AbstractHtmlElement implements HtmlInterface
+{
+    protected string $tag;
+
+    protected string $innerHtml = '';
 
     public function __construct(string $tag, ?string $innerHtml = null)
     {

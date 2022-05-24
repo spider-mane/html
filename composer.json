@@ -18,7 +18,9 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4||^8.0"
+    "php": "^7.4||^8.0",
+    "symfony/polyfill-php80": "^1.25",
+    "symfony/polyfill-php81": "^1.25"
   },
   "require-dev": {
     "behat/behat": "^3.10",

@@ -2,9 +2,9 @@
 
 namespace WebTheory\Html\Contracts;
 
-interface HtmlMarkupInterface
+use Stringable;
+
+interface HtmlInterface extends Stringable
 {
     public function toHtml(): string;
-
-    public function __toString(): string;
 }

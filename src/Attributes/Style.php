@@ -6,9 +6,9 @@ use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
-    public $value = [];
+    protected string $name = 'style';
 
-    protected const ATTRIBUTE = 'style';
+    protected array $value = [];
 
     /**
      * @return $this
@@ -35,7 +35,7 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
         return $this;
     }
 
-    public function contains($style)
+    public function contains($style): bool
     {
         return isset($this->value[$style]);
     }

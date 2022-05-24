@@ -2,26 +2,31 @@
 
 namespace WebTheory\Html\Attributes;
 
+use Stringable;
 use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class HtmlAttribute extends AbstractHtmlAttribute implements HtmlAttributeInterface
 {
     /**
-     * @var string
+     * @var string|int|float|bool|null|Stringable
      */
-    protected $value;
+    protected $value = '';
 
-    public function __construct(string $attribute)
+    public function __construct(string $name)
     {
-        $this->attribute = $attribute;
+        $this->name = $name;
     }
 
     /**
-     * @param string|int|null $value
+     * @param string|int|float|bool|null|Stringable $value
+     *
+     * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): HtmlAttribute
     {
-        $this->value = (string) $value;
+        $this->value = $value;
+
+        return $this;
     }
 
     public function parse(): string
@@ -29,12 +34,8 @@ class HtmlAttribute extends AbstractHtmlAttribute implements HtmlAttributeInterf
         return (string) $this->value;
     }
 
-    public function tokenize(string $attribute): array
+    public function tokenize(string $attribute): string
     {
-        $split = explode('=', $attribute);
-        $attribute = $split[0];
-        $value = htmlspecialchars_decode(str_replace('"', '', $split[1] ?? ''));
-
-        return [$attribute => $value];
+        return $attribute;
     }
 }

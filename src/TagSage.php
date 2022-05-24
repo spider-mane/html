@@ -9,7 +9,7 @@ class TagSage
     /**
      * Array of self closing tags
      */
-    protected static $self_closing = [
+    protected static array $self_closing = [
         'area',
         'base',
         'br',
@@ -29,14 +29,14 @@ class TagSage
     /**
      * Array of whitespace sensitive tags
      */
-    protected static $whitespace_sensitive = [
+    protected static array $whitespace_sensitive = [
         'textarea',
     ];
 
     /**
      * Array of standard HTML5 form elements
      */
-    protected static $standard_form_element = [
+    protected static array $standard_form_element = [
         'button',
         'datalist',
         'fieldset',
@@ -55,7 +55,7 @@ class TagSage
     /**
      * Array of standard HTML5 input types
      */
-    protected static $standard_input_type = [
+    protected static array $standard_input_type = [
         'button',
         'checkbox',
         'color',
