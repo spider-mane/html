@@ -2,6 +2,7 @@
 
 namespace WebTheory\Html\Attributes;
 
+use Stringable;
 use WebTheory\Html\Contracts\HtmlAttributeInterface;
 
 class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
@@ -10,12 +11,19 @@ class Style extends AbstractHtmlAttribute implements HtmlAttributeInterface
 
     protected array $value = [];
 
+    public function __construct(iterable $rules = [])
+    {
+        foreach ($rules as $property => $value) {
+            $this->set($property, $value);
+        }
+    }
+
     /**
      * @return $this
      */
-    public function set($style, $value): Style
+    public function set(string|Stringable $property, string|float|null|Stringable $value): Style
     {
-        $this->value[$style] = $value;
+        $this->value[$property] = $value;
 
         return $this;
     }

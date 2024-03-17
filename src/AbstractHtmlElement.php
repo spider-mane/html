@@ -163,8 +163,8 @@ abstract class AbstractHtmlElement implements HtmlInterface
     {
         return $this
             ->addAttribute('id', $this->id)
-            ->addAttribute('class', $this->classlist->parse())
-            ->addAttribute('style', $this->styles->parse());
+            ->addAttribute('class', $this->classlist)
+            ->addAttribute('style', $this->styles);
     }
 
     public function toHtml(): string
