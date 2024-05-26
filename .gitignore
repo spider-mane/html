@@ -1,10 +1,11 @@
 # Local development files
 *.cache
-@playground*
 /build/
+/cache/
 /dist/
-/var/
-/wordpress/
+/logs/
+/temp/
+@playground*
 
 # Composer
 /vendor/
