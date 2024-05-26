@@ -4,10 +4,9 @@
 # bootstrap
 ################################################################################
 
-$base = dirname(__DIR__);
-$root = dirname(__DIR__, 2);
+$root = dirname(__DIR__);
 
-require "$base/bootstrap.php";
+require "$root/tests/bootstrap.php";
 
 ################################################################################
 # start
