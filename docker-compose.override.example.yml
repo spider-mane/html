@@ -1,0 +1,55 @@
+services:
+  app:
+    build:
+      target: app-workspace
+      args:
+        UNMINIMIZE: yes
+        GIT_USER:
+        GIT_EMAIL:
+        GIT_DEFAULT_BRANCH: "master"
+        GIT_INSTALL_GCM: no
+        LANG: "${LANG}"
+        TZ: "${TZ}"
+    healthcheck:
+      interval: 2s
+      timeout: 2s
+      start_period: 10s
+      retries: 5
+    ports:
+      - "${BROWSERSYNC_PORT:-3000}:${BROWSERSYNC_PORT:-3000}"
+      - "${BROWSERSYNC_UI_PORT:-3001}:${BROWSERSYNC_UI_PORT:-3001}"
+    environment:
+      TERM: "${TERM}"
+      ZSH_THEME: "powerlevel10k/powerlevel10k"
+    volumes:
+      # Source
+      - ".:/var/www/html"
+      # Credentials
+      - "~/.config/composer/auth.json:/home/html/.config/composer/auth.json"
+      # Vscode server
+      - "vscode:/home/html/.vscode-server"
+
+  webserver:
+    build:
+      target: webserver-local
+    networks:
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: "${SERVER_NAME}"
+      LANG: "${LANG}"
+      TZ: "${TZ}"
+      TERM: "${TERM}"
+    volumes:
+      - ".:/var/www/html:ro"
+
+  selenium:
+    environment:
+      TERM: "${TERM}"
+
+networks:
+  nginx-proxy:
+    external: true
+
+volumes:
+  vscode:
+    driver: local
